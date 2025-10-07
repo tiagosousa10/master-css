@@ -88,6 +88,49 @@ button {
 }
 
 /* ================================ */
+/* 4. Box Model - Video Section */
+/* ================================ */
+
+.video {
+  text-align: center;
+  padding: 100px;
+  font-weight: 500;
+}
+
+.video__title {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.video__description {
+  margin-top: 10px;
+  font-weight: 300;
+  color: #6e6e6e;
+}
+
+.video__controls {
+  margin-top: 20px;
+}
+
+.video__button {
+  border: 1px solid #5bb471;
+  background: none;
+  padding: 10px 20px;
+}
+
+.video__button--primary {
+  margin-right: 10px;
+}
+
+.video__container {
+  margin-top: 20px;
+  background-color: #ccc;
+  width: 100%;
+  height: 500px;
+  box-shadow: 1px 4px 7px 4px rgba(0, 0, 0, 0.33);
+}
+
+/* ================================ */
 /* 5. Flex - Programs Section */
 /* ================================ */
 
