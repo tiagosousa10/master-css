@@ -183,5 +183,136 @@
         </form>
       </div>
     </section>
+
+    <!-- 7. Image Slider Section -->
+    <section class="slider">
+      <h2 class="slider__title">Gallery Showcase</h2>
+      <p class="slider__description">
+        Discover our amazing programs and facilities through our image gallery
+      </p>
+      <div class="slider__container">
+        <div class="slider__track" id="sliderTrack">
+          <div class="slider__slide">
+            <img
+              src="images/features.jpg"
+              alt="Features"
+              class="slider__image"
+            />
+          </div>
+          <div class="slider__slide">
+            <img
+              src="images/program1.jpg"
+              alt="Program 1"
+              class="slider__image"
+            />
+          </div>
+          <div class="slider__slide">
+            <img
+              src="images/program2.jpg"
+              alt="Program 2"
+              class="slider__image"
+            />
+          </div>
+          <div class="slider__slide">
+            <img
+              src="images/program3.jpg"
+              alt="Program 3"
+              class="slider__image"
+            />
+          </div>
+          <div class="slider__slide">
+            <img src="images/video.jpg" alt="Video" class="slider__image" />
+          </div>
+        </div>
+        <button class="slider__button slider__button--prev" id="prevBtn">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="slider__button slider__button--next" id="nextBtn">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <script>
+      // Image Slider Functionality
+      let currentSlide = 0;
+      let autoSlideInterval;
+      let isPaused = false;
+      const slides = document.querySelectorAll(".slider__slide");
+      const totalSlides = slides.length;
+      const sliderTrack = document.getElementById("sliderTrack");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      // Function to update slider position
+      function updateSlider() {
+        const translateX = -currentSlide * 100;
+        sliderTrack.style.transform = `translateX(${translateX}%)`;
+      }
+
+      // Function to go to next slide
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+      }
+
+      // Function to go to previous slide
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider();
+      }
+
+      // Function to start auto-advance
+      function startAutoSlide() {
+        autoSlideInterval = setInterval(nextSlide, 3000);
+      }
+
+      // Function to stop auto-advance
+      function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+      }
+
+      // Function to pause and resume auto-advance
+      function pauseAutoSlide() {
+        isPaused = true;
+        stopAutoSlide();
+        // Resume after 5 seconds of inactivity
+        setTimeout(() => {
+          if (isPaused) {
+            isPaused = false;
+            startAutoSlide();
+          }
+        }, 5000);
+      }
+
+      // Event listeners for navigation buttons
+      nextBtn.addEventListener("click", () => {
+        nextSlide();
+        pauseAutoSlide();
+      });
+
+      prevBtn.addEventListener("click", () => {
+        prevSlide();
+        pauseAutoSlide();
+      });
+
+      // Initialize slider
+      updateSlider();
+      startAutoSlide();
+
+      // Pause on hover
+      const sliderContainer = document.querySelector(".slider__container");
+      sliderContainer.addEventListener("mouseenter", () => {
+        if (!isPaused) {
+          stopAutoSlide();
+        }
+      });
+
+      sliderContainer.addEventListener("mouseleave", () => {
+        if (!isPaused) {
+          startAutoSlide();
+        }
+      });
+    </script>
   </body>
 </html>
